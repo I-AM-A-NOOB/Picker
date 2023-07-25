@@ -10,7 +10,6 @@ from ctypes import windll
 
 # other import
 from pathlib import Path
-import pyglet
 import random
 import json
 import unicodedata
@@ -27,7 +26,6 @@ class PickerApp:
         # load settings
         self.path = Path(__file__).resolve().parent
         windll.shcore.SetProcessDpiAwareness(1)
-        pyglet.font.add_file("%s\\sarasa-mono.ttf" % self.path)
         with open("settings.json") as configure:
             cfg_list = configure.read()
             cfg_list = json.loads(cfg_list)
@@ -212,7 +210,7 @@ class PickerApp:
         self.name = tk.Text(
             self.frame_main,
             relief="flat",
-            font=("等距更纱黑体 SC", 30),
+            font=("黑体", 40),
             yscrollcommand=self.name_bar.set,
         )
         if self.theme == "dark":
@@ -401,17 +399,16 @@ class PickerApp:
     def direct(self):
         width = self.root.winfo_width() - 45
         result_width = list(self.str_width(i) + 1 for i in self.result)
-        # sarasa mono En: 25 CJK: 50
         width_line = 0
         line = 0
         display = []
         i = 0
         while i < len(self.result):
-            if width_line + 25 * (result_width[i] + 1) > width:
+            if width_line + 34 * (result_width[i] + 1) > width:
                 display.append(" ".join(self.result[line:i]))
                 width_line = 0
                 line = i
-            width_line += 25 * (result_width[i] + 1)
+            width_line += 34 * (result_width[i] + 1)
             i += 1
 
         display.append(" ".join(self.result[line : i + 1]))
