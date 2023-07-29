@@ -16,7 +16,6 @@
 |icon_dark.png|窗口图标（暗）|
 |icon_light.png|窗口图标（亮）|
 |icon.ico|程序图标|
-|sarasa-mono.ttf|字体|
 |main.py|主程序源代码|
 |settings.json|设置|
 |namelist.txt|名单，可在设置中调整|
@@ -30,7 +29,6 @@
 |sv_ttk|MIT|
 |win32mica|MIT|
 |darkdetect|BSD|
-|pyglet|BSD|
 |pyperclip|BSD|
 
 ## TODO

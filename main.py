@@ -25,7 +25,10 @@ class PickerApp:
         self.history_point = 0
         # load settings
         self.path = Path(__file__).resolve().parent
-        windll.shcore.SetProcessDpiAwareness(1)
+        try:
+            windll.shcore.SetProcessDpiAwareness(1)
+        except:
+            pass
         with open("settings.json") as configure:
             cfg_list = configure.read()
             cfg_list = json.loads(cfg_list)
@@ -36,9 +39,12 @@ class PickerApp:
         else:
             self.ui_font = 2
         if cfg_list["theme"] == "auto":
-            if darkdetect.isDark():
-                self.theme = "dark"
-            else:
+            try:
+                if darkdetect.isDark():
+                    self.theme = "dark"
+                else:
+                    self.theme = "light"
+            except:
                 self.theme = "light"
         else:
             self.theme = cfg_list["theme"]
@@ -68,8 +74,11 @@ class PickerApp:
         # Fluent Design
         sv_ttk.set_theme(self.theme)
         self.root.update()
-        if self.theme == "dark":
-            ApplyMica(windll.user32.GetParent(self.root.winfo_id()), MICAMODE.LIGHT)
+        try:
+            if self.theme == "dark":
+                ApplyMica(windll.user32.GetParent(self.root.winfo_id()), MICAMODE.LIGHT)
+        except:
+            pass
         stylesheet = ttk.Style()
         stylesheet.configure(
             "TLabelframe.Label",
